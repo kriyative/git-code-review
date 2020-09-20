@@ -1,5 +1,50 @@
 #+title: Git Code Review - an Emacs minor-mode for inline code comments
 
+* Introduction
+
+Currently, developer teams use Pull Requests and GitHub's PR comment
+system for doing code reviews and discussing the pros and cons of
+bugfixes and/or feature development. The lifecycle of PRs and their
+associated comment metadata is too far removed from the code itself
+and ends up with overall institutional memory loss. Inline Code
+Comments is an alternative, which proposes keeping review comments
+inline with the code itself - thereby decoupling the discussion
+insights from the PR itself.
+
+This Emacs-Lisp package adds a few simple commands to help incorporate
+inline code comments into a Git workflow, and help make the
+comments/discussions follow a dead-simple convention.
+
+Each block of comments is called a =REVIEW= block. A =REVIEW= block
+begins with something like:
+
+#+BEGIN_SRC clojure
+  ;; REVIEW(author): A one line title (no line break)
+  ;; Multi-line comment subject, which may incorporate code blocks:
+  ;;
+  ;; (defn foo [a]
+  ;;   (do
+  ;;     (complex
+  ;;      (things (with a)))))
+  ;;
+  ;; and ends with
+  ;; ----------------------------------------------------------------
+#+END_SRC
+
+Additional comments/replies can be appended using the following
+convention:
+
+#+BEGIN_SRC clojure
+  ;; and ends with
+  ;; ----------------
+  ;; (second-author): I think the inner call to `complex` can be
+  ;; refactored using `foo.bar.comple/refactored-implementation`
+  ;; ----------------------------------------------------------------
+#+END_SRC
+
+=git-code-review= provides commands that make it easy to manage these
+review blocks.
+
 * Installation
 #+BEGIN_SRC emacs-lisp
   (el-get-bundle kriyative/git-code-review)
