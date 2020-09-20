@@ -1,0 +1,30 @@
+#+title: Git Code Review - an Emacs minor-mode for inline code comments
+
+* Installation
+#+BEGIN_SRC emacs-lisp
+  (el-get-bundle kriyative/git-code-review)
+
+  (use-package git-code-review
+    :config
+    (add-hook 'clojure-mode-hook 'gcr-mode))
+#+END_SRC
+
+* Usage
+In any code buffer, use the following commands/key bindings
+
+- =gcr-new-review= (=C-c v r=)
+Open the comment editor to create a new =REVIEW= block
+
+- =gcr-add-comment= (=C-c v c=)
+Open the comment editor and add a comment to an existing =REVIEW=
+block
+
+- =gcr-edit-comment= (=C-c v e=)
+Open the comment editor with the contents of the current comment
+
+- =gcr-next-review= (=C-c v n=)
+Jump to the next =REVIEW= block
+
+- =gcr-prev-review= (=C-c v p=)
+Jump to the previous =REVIEW= block
+
