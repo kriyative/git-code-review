@@ -163,7 +163,6 @@
 
 (defvar gcr-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "\C-cvn" 'gcr-next-review)
     (define-key map "\C-c\C-vn" 'gcr-next-review)
     (define-key map "\C-c\C-vp" 'gcr-prev-review)
     (define-key map "\C-c\C-vr" 'gcr-new-review)
