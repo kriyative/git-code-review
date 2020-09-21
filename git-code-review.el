@@ -79,10 +79,10 @@
 ;; support mixed mode editing
 ;; ----------------------------------------------------------------
 (defun gcr--open-editor (slug-template
-                           state
-                           save-callback
-                           m1
-                           &optional m2)
+                         state
+                         save-callback
+                         m1
+                         &optional m2)
   (let ((buf (get-buffer-create "*gcr-edit*")))
     (with-current-buffer buf
       (erase-buffer)
@@ -161,10 +161,10 @@
         (let ((text (gcr--decommentize
                      (buffer-substring-no-properties here (point)))))
           (gcr--open-editor (lambda () (insert text))
-                              '(:edit-comment-p t)
-                              'gcr--save-changes
-                              m1
-                              (gcr--make-marker)))))))
+                            '(:edit-comment-p t)
+                            'gcr--save-changes
+                            m1
+                            (gcr--make-marker)))))))
 
 (defvar gcr-mode-map
   (let ((map (make-sparse-keymap)))
