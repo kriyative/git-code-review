@@ -100,7 +100,9 @@
       (set-variable 'fill-column 60 t)
       (auto-fill-mode 1)
       (local-set-key (kbd "\C-c\C-c") 'gcr--editor-save)
-      (local-set-key (kbd "\C-c\C-k") 'gcr--editor-cancel))
+      (local-set-key (kbd "\C-c\C-k") 'gcr--editor-cancel)
+      (setq header-line-format
+            "Edit, then exit with 'C-c C-c' to save or 'C-c C-k' to cancel"))
     (pop-to-buffer buf)))
 
 (defun gcr--make-marker ()
