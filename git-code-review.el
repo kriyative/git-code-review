@@ -132,9 +132,9 @@
 (defun gcr-new-review ()
   (interactive)
   (gcr--open-editor (concat gcr--review-slug "(%s): ")
-                      '(:new-comment-p t)
-                      'gcr--save-changes
-                      (gcr--make-marker)))
+                    '(:new-comment-p t)
+                    'gcr--save-changes
+                    (gcr--make-marker)))
 
 (defun gcr-add-comment ()
   (interactive)
