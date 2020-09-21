@@ -100,13 +100,13 @@
     (set-marker m1 (point))
     m1))
 
+(defun gcr--review-prefix ()
+  (format "%s%s" (gcr--comment-prefix) gcr--review-slug))
+
 (defun gcr-prev-review ()
   (interactive)
   (beginning-of-line)
-  (re-search-backward (format "%s%s"
-                              (gcr--comment-prefix)
-                              gcr--review-slug)
-                      nil t))
+  (re-search-backward (gcr--review-prefix) nil t))
 
 (defun gcr-next-review ()
   (interactive)
@@ -116,10 +116,7 @@
 (defun gcr--in-review-p ()
   (save-excursion
     (let ((end (point)))
-      (re-search-backward (format "%s%s"
-                                  (gcr--comment-prefix)
-                                  gcr--review-slug)
-                          nil t)
+      (re-search-backward (gcr--review-prefix) nil t)
       (beginning-of-line)
       (and (not (= (point) end))
            (comment-only-p (point) end)))))
