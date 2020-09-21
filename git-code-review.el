@@ -27,7 +27,7 @@
 (defun gcr--comment-prefix ()
   (concat comment-start
           (when (< (length comment-start) 2)
-            comment-start)
+            (concat comment-start comment-start))
           " "))
 
 (defun gcr--commentize (text)
