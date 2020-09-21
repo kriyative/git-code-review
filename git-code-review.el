@@ -136,8 +136,9 @@
   (if (not (gcr--in-review-p))
     (gcr-new-review)
     (progn
-      (comment-forward (point-max))
       (beginning-of-line)
+      (comment-forward (point-max))
+      (previous-line)
       (gcr--open-editor "(%s): "
                         '(:new-comment-p nil)
                         'gcr--save-changes
