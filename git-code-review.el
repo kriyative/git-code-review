@@ -57,7 +57,10 @@
       (unless (or new-comment-p edit-comment-p)
         (gcr--insert (gcr--commentize gcr--comment-separator))
         (next-line))
-      (gcr--insert (gcr--commentize (string-trim text))))))
+      (gcr--insert (gcr--commentize (string-trim text)))
+      (when new-comment-p
+        (next-line)
+        (gcr--insert (gcr--commentize gcr--review-end))))))
 
 (defun gcr--editor-save ()
   (interactive)
