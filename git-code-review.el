@@ -113,6 +113,17 @@
   (re-search-forward gcr--review-end nil t)
   (re-search-forward gcr--review-slug nil t))
 
+(defun gcr--in-review-p ()
+  (save-excursion
+    (let ((end (point)))
+      (re-search-backward (format "%s%s"
+                                  (gcr--comment-prefix)
+                                  gcr--review-slug)
+                          nil t)
+      (beginning-of-line)
+      (and (not (= (point) end))
+           (comment-only-p (point) end)))))
+
 (defun gcr-new-review ()
   (interactive)
   (gcr--open-editor (concat gcr--review-slug "(%s): ")
@@ -122,15 +133,15 @@
 
 (defun gcr-add-comment ()
   (interactive)
-  (if (not (or (equal gcr--review-slug (gcr--thing-at-point))
-               (re-search-backward gcr--review-slug nil t)))
-      (gcr-new-review)
-    (re-search-forward gcr--review-end nil t)
-    (beginning-of-line)
-    (gcr--open-editor "(%s): "
+  (if (not (gcr--in-review-p))
+    (gcr-new-review)
+    (progn
+      (comment-forward (point-max))
+      (beginning-of-line)
+      (gcr--open-editor "(%s): "
                         '(:new-comment-p nil)
                         'gcr--save-changes
-                        (gcr--make-marker))))
+                        (gcr--make-marker)))))
 
 (defun gcr-edit-comment ()
   (interactive)
