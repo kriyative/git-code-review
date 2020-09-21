@@ -132,6 +132,8 @@
            (comment-only-p (point) end)))))
 
 (defun gcr-new-review ()
+  "This command will open a Git Code Review editor buffer and a
+new REVIEW block will be created from its contents."
   (interactive)
   (gcr--open-editor (concat gcr--review-slug "(%s): ")
                     '(:new-comment-p t)
@@ -139,6 +141,11 @@
                     (gcr--make-marker)))
 
 (defun gcr-add-comment ()
+  "If point is within an inline review block, this command will
+open a Git Code Review editor buffer whose contents can be saved
+as a new comment in the review block. If point is not in an
+inline review block, a new REVIEW block will be created from the
+contents of the Git Code Review editor buffer."
   (interactive)
   (if (not (gcr--in-review-p))
       (gcr-new-review)
@@ -151,6 +158,9 @@
                       (gcr--make-marker))))
 
 (defun gcr-edit-comment ()
+  "When point is on an inline review comment, this command will
+open the comment text in a separate Git Code Review editor
+buffer."
   (interactive)
   (let ((author (format "(%s)" user-login-name)))
     (if (not (or (equal (thing-at-point 'list t) author)
