@@ -134,15 +134,14 @@
 (defun gcr-add-comment ()
   (interactive)
   (if (not (gcr--in-review-p))
-    (gcr-new-review)
-    (progn
-      (beginning-of-line)
-      (comment-forward (point-max))
-      (previous-line)
-      (gcr--open-editor "(%s): "
-                        '(:new-comment-p nil)
-                        'gcr--save-changes
-                        (gcr--make-marker)))))
+      (gcr-new-review)
+    (beginning-of-line)
+    (comment-forward (point-max))
+    (previous-line)
+    (gcr--open-editor "(%s): "
+                      '(:new-comment-p nil)
+                      'gcr--save-changes
+                      (gcr--make-marker))))
 
 (defun gcr-edit-comment ()
   (interactive)
