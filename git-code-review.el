@@ -73,6 +73,11 @@
   (erase-buffer)
   (quit-window))
 
+;; REVIEW(ram): GCR editor needs its own mode
+;; The GCR editor is just a Fundamental mode buffer
+;; currently. It should be its own (minor) mode, so it could
+;; support mixed mode editing
+;; ----------------------------------------------------------------
 (defun gcr--open-editor (slug-template
                            state
                            save-callback
