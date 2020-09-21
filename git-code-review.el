@@ -85,6 +85,7 @@
                          &optional m2)
   (let ((buf (get-buffer-create "*gcr-edit*")))
     (with-current-buffer buf
+      (indented-text-mode)
       (erase-buffer)
       (set-variable 'gcr--save-callback save-callback t)
       (set-variable 'gcr--save-callback-args (list m1 m2) t)
