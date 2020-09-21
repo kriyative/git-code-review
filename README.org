@@ -19,27 +19,27 @@ Each block of comments is called a =REVIEW= block. A =REVIEW= block
 begins with something like:
 
 #+BEGIN_SRC clojure
-  ;; REVIEW(author): A one line title (no line break)
-  ;; Multi-line comment subject, which may incorporate code blocks:
-  ;;
-  ;; (defn foo [a]
-  ;;   (do
-  ;;     (complex
-  ;;      (things (with a)))))
-  ;;
-  ;; and ends with
-  ;; ----------------------------------------------------------------
+  ;;; REVIEW(author): A one line title (no line break)
+  ;;; Multi-line comment subject, which may incorporate code blocks:
+  ;;;
+  ;;; (defn foo [a]
+  ;;;   (do
+  ;;;     (complex
+  ;;;      (things (with a)))))
+  ;;;
+  ;;; and ends with
+  ;;; ----------------------------------------------------------------
 #+END_SRC
 
 Additional comments/replies can be appended using the following
 convention:
 
 #+BEGIN_SRC clojure
-  ;; and ends with
-  ;; ----------------
-  ;; (second-author): I think the inner call to `complex` can be
-  ;; refactored using `foo.bar.comple/refactored-implementation`
-  ;; ----------------------------------------------------------------
+  ;;; and ends with
+  ;;; ----------------
+  ;;; (second-author): I think the inner call to `complex` can be
+  ;;; refactored using `foo.bar.comple/refactored-implementation`
+  ;;; ----------------------------------------------------------------
 #+END_SRC
 
 =git-code-review= provides commands that make it easy to manage these
