@@ -1,4 +1,4 @@
-;;; Git Code Review minor mode
+;;; git-code-review.el --- Git Code Review minor mode
 
 (defun gcr--new-line ()
   (beginning-of-line)
