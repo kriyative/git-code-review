@@ -56,10 +56,10 @@
         (delete-region (point) (marker-position m2)))
       (unless (or new-comment-p edit-comment-p)
         (gcr--insert (gcr--commentize gcr--comment-separator))
-        (next-line))
+        (forward-line))
       (gcr--insert (gcr--commentize (string-trim text)))
       (when new-comment-p
-        (next-line)
+        (forward-line)
         (gcr--insert (gcr--commentize gcr--review-end))))))
 
 (defun gcr--editor-save ()
@@ -152,7 +152,7 @@ contents of the Git Code Review editor buffer."
       (gcr-new-review)
     (beginning-of-line)
     (comment-forward (point-max))
-    (previous-line)
+    (forward-line -1)
     (gcr--open-editor "(%s): "
                       '(:new-comment-p nil)
                       'gcr--save-changes
