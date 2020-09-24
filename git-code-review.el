@@ -1,5 +1,7 @@
 ;;; git-code-review.el --- Git Code Review minor mode
 
+(require 'magit)
+
 (defun gcr--new-line ()
   (beginning-of-line)
   (open-line 1)
@@ -195,5 +197,37 @@ buffer."
   nil                                   ; initial-value
   :keymap gcr-mode-map
   :lighter " GCR")
+
+(defun gcr--sh (command &rest args)
+  (let ((buf (get-buffer-create "*gcr-sh*")))
+    (unwind-protect
+        (let ((rc (apply 'call-process command nil buf nil args)))
+          (with-current-buffer buf
+            (list :rc rc
+                  :out (buffer-substring-no-properties
+                        (point-min)
+                        (point-max)))))
+      (kill-buffer buf))))
+
+(defun gcr--workdir-dirty-p ()
+  (destructuring-bind (&key rc out)
+      (gcr--sh "git" "diff" "--quiet")
+    (< 0 rc)))
+
+(defun gcr-review-branch (&optional branch-name)
+  (interactive (list
+                (magit-read-branch "Branch")))
+  (when (gcr--workdir-dirty-p)
+    (if (y-or-n-p "Dirty workdir, stash changes? ")
+        (magit-stash-both
+         (format "GCR-review-%s"
+                 (format-time-string "%FT%T")))
+      (error "Unstashed changes are in the way")))
+  (let ((local-branch (file-name-nondirectory branch-name)))
+    (if (not (magit-commit-p local-branch))
+        (magit-branch-and-checkout local-branch branch-name)
+      (magit-checkout local-branch)
+      (magit-pull-branch local-branch '()))
+    (magit-diff-range (concat "master..." local-branch))))
 
 (provide 'git-code-review)
