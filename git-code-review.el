@@ -183,11 +183,11 @@ buffer."
 
 (defvar gcr-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "\C-c\C-vn" 'gcr-next-review)
-    (define-key map "\C-c\C-vp" 'gcr-prev-review)
-    (define-key map "\C-c\C-vr" 'gcr-new-review)
-    (define-key map "\C-c\C-vc" 'gcr-add-comment)
-    (define-key map "\C-c\C-ve" 'gcr-edit-comment)
+    (define-key map "\C-cRn" 'gcr-next-review)
+    (define-key map "\C-cRp" 'gcr-prev-review)
+    (define-key map "\C-cRr" 'gcr-new-review)
+    (define-key map "\C-cRc" 'gcr-add-comment)
+    (define-key map "\C-cRe" 'gcr-edit-comment)
     map))
 
 (define-minor-mode gcr-mode
