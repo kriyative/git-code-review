@@ -59,19 +59,19 @@ review blocks.
 * Usage
 In any code buffer, use the following commands/key bindings
 
-- =gcr-new-review= (=C-c C-v r=)
+- =gcr-new-review= (=C-c R r=)
 Open the comment editor to create a new =REVIEW= block
 
-- =gcr-add-comment= (=C-c C-v c=)
+- =gcr-add-comment= (=C-c R c=)
 Open the comment editor and add a comment to an existing =REVIEW=
 block
 
-- =gcr-edit-comment= (=C-c C-v e=)
+- =gcr-edit-comment= (=C-c R e=)
 Open the comment editor with the contents of the current comment
 
-- =gcr-next-review= (=C-c C-v n=)
+- =gcr-next-review= (=C-c R n=)
 Jump to the next =REVIEW= block
 
-- =gcr-prev-review= (=C-c C-v p=)
+- =gcr-prev-review= (=C-c R p=)
 Jump to the previous =REVIEW= block
 
