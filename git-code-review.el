@@ -117,12 +117,14 @@
 (defun gcr-prev-review ()
   (interactive)
   (beginning-of-line)
-  (re-search-backward (gcr--review-prefix) nil t))
+  (unless (re-search-backward (gcr--review-prefix) nil t)
+    (message "No more reviews")))
 
 (defun gcr-next-review ()
   (interactive)
   (re-search-forward gcr--review-end nil t)
-  (re-search-forward gcr--review-slug nil t))
+  (unless (re-search-forward (gcr--review-prefix) nil t)
+    (message "No more reviews")))
 
 (defun gcr--in-review-p ()
   (save-excursion
