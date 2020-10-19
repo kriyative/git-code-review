@@ -35,7 +35,7 @@
 (defun gcr--commentize (text)
   (let ((comment-prefix (gcr--comment-prefix)))
     (with-temp-buffer
-      (insert text)
+        (insert text)
       (goto-char (point-min))
       (replace-regexp "^" comment-prefix)
       (buffer-substring-no-properties (point-min) (point-max)))))
@@ -43,7 +43,7 @@
 (defun gcr--decommentize (text)
   (let ((comment-prefix (gcr--comment-prefix)))
     (with-temp-buffer
-      (insert text)
+        (insert text)
       (goto-char (point-min))
       (replace-regexp (concat "^" comment-prefix) "")
       (buffer-substring-no-properties (point-min) (point-max)))))
@@ -93,13 +93,13 @@
       (set-variable 'gcr--save-callback-args (list m1 m2) t)
       (set-variable 'gcr--state state t)
       (cond
-       ((stringp slug-template)
-        (progn
-          (gcr--insert
-           (format slug-template user-login-name))
-          (save-excursion (insert "Comment subject"))))
-       ((functionp slug-template)
-        (funcall slug-template)))
+        ((stringp slug-template)
+         (progn
+           (gcr--insert
+            (format slug-template user-login-name))
+           (save-excursion (insert "Comment subject"))))
+        ((functionp slug-template)
+         (funcall slug-template)))
       (set-variable 'fill-column 60 t)
       (auto-fill-mode 1)
       (local-set-key (kbd "\C-c\C-c") 'gcr--editor-save)
@@ -130,11 +130,11 @@
 
 (defun gcr--in-review-p ()
   (save-excursion
-    (let ((end (point)))
-      (re-search-backward (gcr--review-prefix) nil t)
-      (beginning-of-line)
-      (and (not (= (point) end))
-           (comment-only-p (point) end)))))
+   (let ((end (point)))
+     (re-search-backward (gcr--review-prefix) nil t)
+     (beginning-of-line)
+     (and (not (= (point) end))
+          (comment-only-p (point) end)))))
 
 (defun gcr-new-review ()
   "This command will open a Git Code Review editor buffer and a
@@ -201,12 +201,12 @@ buffer."
 (defun gcr--sh (command &rest args)
   (let ((buf (get-buffer-create "*gcr-sh*")))
     (unwind-protect
-        (let ((rc (apply 'call-process command nil buf nil args)))
-          (with-current-buffer buf
-            (list :rc rc
-                  :out (buffer-substring-no-properties
-                        (point-min)
-                        (point-max)))))
+         (let ((rc (apply 'call-process command nil buf nil args)))
+           (with-current-buffer buf
+             (list :rc rc
+                   :out (buffer-substring-no-properties
+                         (point-min)
+                         (point-max)))))
       (kill-buffer buf))))
 
 (defun gcr--workdir-dirty-p ()
