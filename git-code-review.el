@@ -223,7 +223,7 @@ buffer."
          (format "GCR-review-%s"
                  (format-time-string "%FT%T")))
       (error "Unstashed changes are in the way")))
-  (let ((local-branch (file-name-nondirectory branch-name)))
+  (let ((local-branch (string-remove-prefix "origin/" branch-name)))
     (if (not (magit-commit-p local-branch))
         (magit-branch-and-checkout local-branch branch-name)
       (magit-checkout local-branch)
