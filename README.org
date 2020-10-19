@@ -1,4 +1,5 @@
 #+title: Git Code Review - an Emacs minor-mode for inline code comments
+#+startup: showall
 
 * Introduction
 
@@ -75,3 +76,7 @@ Jump to the next =REVIEW= block
 - =gcr-prev-review= (=C-c R p=)
 Jump to the previous =REVIEW= block
 
+- =gcr-review-branch=
+This command can be used to create a local branch of a PR using the
+remote branch name. After creating the branch, a magit-diff buffer
+will be opened with the list of changes in the PR.
