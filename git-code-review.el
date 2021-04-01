@@ -167,23 +167,24 @@ contents of the Git Code Review editor buffer."
 open the comment text in a separate Git Code Review editor
 buffer."
   (interactive)
-  (let ((author (format "(%s)" user-login-name)))
-    (if (not (or (equal (thing-at-point 'list t) author)
-                 (re-search-backward author nil t)))
-        (gcr-new-review)
-      (let ((here (progn
-                    (forward-line 0)
-                    (point)))
-            (m1 (gcr--make-marker)))
-        (re-search-forward gcr--comment-separator nil t)
-        (beginning-of-line)
-        (let ((text (gcr--decommentize
-                     (buffer-substring-no-properties here (point)))))
-          (gcr--open-editor (lambda () (insert text))
-                            '(:edit-comment-p t)
-                            'gcr--save-changes
-                            m1
-                            (gcr--make-marker)))))))
+  (save-excursion
+    (let ((author (format "(%s)" user-login-name)))
+      (if (not (or (equal (thing-at-point 'list t) author)
+                   (re-search-backward author nil t)))
+          (gcr-new-review)
+        (let ((here (progn
+                      (forward-line 0)
+                      (point)))
+              (m1 (gcr--make-marker)))
+          (re-search-forward gcr--comment-separator nil t)
+          (beginning-of-line)
+          (let ((text (gcr--decommentize
+                       (buffer-substring-no-properties here (point)))))
+            (gcr--open-editor (lambda () (insert text))
+                              '(:edit-comment-p t)
+                              'gcr--save-changes
+                              m1
+                              (gcr--make-marker))))))))
 
 (defvar gcr-mode-map
   (let ((map (make-sparse-keymap)))
