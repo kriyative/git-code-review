@@ -35,17 +35,19 @@
 (defun gcr--commentize (text)
   (let ((comment-prefix (gcr--comment-prefix)))
     (with-temp-buffer
-        (insert text)
+      (insert text)
       (goto-char (point-min))
-      (replace-regexp "^" comment-prefix)
+      (while (re-search-forward "^" nil t)
+        (replace-match comment-prefix))
       (buffer-substring-no-properties (point-min) (point-max)))))
 
 (defun gcr--decommentize (text)
   (let ((comment-prefix (gcr--comment-prefix)))
     (with-temp-buffer
-        (insert text)
+      (insert text)
       (goto-char (point-min))
-      (replace-regexp (concat "^" comment-prefix) "")
+      (while (re-search-forward (concat "^" comment-prefix) nil t)
+        (replace-match ""))
       (buffer-substring-no-properties (point-min) (point-max)))))
 
 (defun gcr--save-changes (text m1 &optional m2)
