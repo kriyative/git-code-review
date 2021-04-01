@@ -171,7 +171,9 @@ buffer."
     (if (not (or (equal (thing-at-point 'list t) author)
                  (re-search-backward author nil t)))
         (gcr-new-review)
-      (let ((here (point))
+      (let ((here (progn
+                    (forward-line 0)
+                    (point)))
             (m1 (gcr--make-marker)))
         (re-search-forward gcr--comment-separator nil t)
         (beginning-of-line)
